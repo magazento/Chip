@@ -1,0 +1,120 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Cart cross sell items template
+ *
+ * @see Mage_Checkout_Block_Cart_Crosssell
+ */
+?>
+<?php if($_products = $this->getItemCount()):
+    $_products = $this->getItems();
+    ?>
+<section class="crosssell">
+        <div class="section-heading">
+            <div class="grid_16">
+                <h2><?php echo $this->__('You May Be Interested') ?></h2>
+                <div class="section-divider"></div>
+                <p><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('cart_crosssell')->toHtml(); ?> </p>
+                <div class="navigation-buttons">
+                    <?php if ($this->getItemCount() >3): ?>
+                        <span class="button scroll-left"><i class="icon-angle-left"></i> <?php echo $this->__('previous') ?></span>
+                    <?php endif; ?>
+                    <?php if ($this->getItemCount() >3): ?>
+                        <span class="button scroll-right"><?php echo $this->__('next') ?> <i class="icon-angle-right"></i></span>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="grid_16 width-mobile">
+                    <div class="block-content iosSlider-crosssell">
+                        <ul class="slider-items">
+                            <?php foreach ($_products as $_product): ?>
+                                <li class="item">
+                                    <div class="product-item">
+
+                                        <?php
+                                            $_gallery = Mage::getModel('catalog/product')->load($_product->getId())->getMediaGalleryImages();
+                                            $_image = null;
+                                            if (count($_gallery)) {
+                                                foreach ($_gallery as $item)
+                                                {
+                                                    $_image = $item->getFile();
+                                                }
+                                            }
+                                        ?>
+                                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>" class="product-image">
+                                            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->keepFrame(false)->resize(300,null); ?>"
+                                                 alt="<?php echo $this->htmlEscape($_product->getName()) ?>" />
+
+                                            <img class="hover-image"
+                                                 src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image',$_image)->keepFrame(false)->resize(300,null); ?>"
+                                                 alt="<?php echo $this->htmlEscape($_product->getName()) ?>" />
+
+                                        </a>
+
+                                        <div class="promo-container">
+                                            <?php
+                                                $_promo = $this->helper('chip/data')->getPromoLabels($_product);
+                                                echo $_promo['sale'];
+                                                echo $_promo['new'];
+                                            ?>
+                                        </div>
+
+                                        <h2 class="item fn product-name">
+                                            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_product->getName() ?>"><?php echo $this->htmlEscape($_product->getName()) ?></a>
+                                        </h2>
+                                        <span class="price"><?php echo $this->__('Price') ?>: <?php echo $_currency; ?><?php echo number_format($_product->getFinalPrice(),2); ?></span>
+                                        <?php if($_product->getRatingSummary()): ?>
+                                            <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                                        <?php endif; ?>
+
+                                        <?php if($_product->getRatingSummary()): ?>
+                                            <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                                        <?php endif; ?>
+                                        <p class="short-description">
+                                            <?php
+                                            $_description = nl2br($_product->getShortDescription());
+                                            if (strlen($_description) > 200) {
+                                                echo substr($_description,0,200).' ...';
+                                            } else {
+                                                echo $_description;
+                                            }
+                                            ?>
+                                        </p>
+
+                                    </div>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+</section>
+<?php endif; ?>

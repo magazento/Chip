@@ -1,0 +1,5 @@
+<div class="caption lfb" data-x="50" data-y="70" data-speed="900" data-start="500" data-easing="easeOutBack"><img src="{{media url="wysiwyg/slide-product-1.png"}}" alt="" /></div>
+<div class="caption sfr" data-x="220" data-y="90" data-speed="900" data-start="2200" data-easing="easeOutBack"><img src="{{media url="wysiwyg/slide-product-badge.png"}}" alt="" /></div>
+<div class="homepagename caption sft large_text" data-x="550" data-y="120" data-speed="300" data-start="1200" data-easing="easeOutExpo">Dummy Product Three</div>
+<div class="caption sft small_text" data-x="550" data-y="170" data-speed="300" data-start="1300" data-easing="easeOutExpo">Lorem Ipsum is simply dummy text of the<br /> printing and typesetting industry. Lorem <br /> Ipsum has been the industry's standard <br /> dummy text ever since the 1500</div>
+<div class="caption sfr" data-x="547" data-y="258" data-speed="300" data-start="1700" data-easing="easeOutBack"><img src="{{media url="wysiwyg/slide-product-button.png"}}" alt="" /></div>

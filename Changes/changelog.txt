@@ -1,0 +1,7 @@
+Version 1.0.1: CSS update
+* Fixed minor issues with CSS on product page & IE
+* Reviews layout update
+* Template now fully responsive: iPhone,iPad support out of the box
+
+Version 1.0: Initial Release
+* First stable version
